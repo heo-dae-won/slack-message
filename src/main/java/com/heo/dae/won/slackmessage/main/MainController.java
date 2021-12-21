@@ -33,9 +33,13 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(HttpServletRequest request){
-        System.out.println("block_actions >>> " );
+    public void responsePost(HttpServletRequest request, Map<String,Object> payload){
+        System.out.println("request >>> " );
         request.getParameterMap().entrySet().forEach(System.out::println);
+        System.out.println("payload >>> " );
+        payload.entrySet().forEach(System.out::println);
+        System.out.println("=========");
+        System.out.println(request.getParameter("payload"));
     }
 
     @PostMapping("/response2")
