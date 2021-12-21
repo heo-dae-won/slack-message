@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,7 +36,8 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(){
+    public void responsePost(@RequestParam String callback_id){
+        System.out.println("callback id >>> " + callback_id);
         System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
     }
 
