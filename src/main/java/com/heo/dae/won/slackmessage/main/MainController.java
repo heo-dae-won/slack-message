@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +32,11 @@ public class MainController {
     @GetMapping("/response")
     public void response(){
         System.out.println("resposne >>>>>>>>>>>>>>>>>>>");
+    }
+
+    @PostMapping("/response")
+    public void responsePost(){
+        System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
     }
 
     @GetMapping("/send")
