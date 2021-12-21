@@ -3,10 +3,7 @@ package com.heo.dae.won.slackmessage.main;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,10 +30,18 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(Map<String, Object> body, String callback_id){
-        System.out.println("callback id >>> " + body.get("response_url"));
-        System.out.println("callback id >>> " + body.get("actions"));
-        System.out.println("callback id >>> " + callback_id);
+    public void responsePost(@RequestBody Map<String, Object> data, Map<String, Object> data2){
+        System.out.println("callback id >>> ");
+        data.entrySet().forEach(System.out::println);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> ");
+        data2.entrySet().forEach(System.out::println);
+        System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
+    }
+
+    @PostMapping("/response2")
+    public void responsePost2(Map<String, Object> data){
+        System.out.println("response2222 >>> ");
+        data.entrySet().forEach(System.out::println);
         System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
     }
 
