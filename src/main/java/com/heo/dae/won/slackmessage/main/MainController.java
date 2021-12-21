@@ -33,8 +33,8 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(String block_actions){
-        System.out.println("block_actions >>> " + block_actions);
+    public void responsePost(String user){
+        System.out.println("block_actions >>> " + user);
     }
 
     @PostMapping("/response2")
