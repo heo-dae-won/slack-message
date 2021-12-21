@@ -33,7 +33,9 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(String callback_id){
+    public void responsePost(Map<String, Object> body, String callback_id){
+        System.out.println("callback id >>> " + body.get("response_url"));
+        System.out.println("callback id >>> " + body.get("actions"));
         System.out.println("callback id >>> " + callback_id);
         System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
     }
