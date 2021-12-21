@@ -9,7 +9,6 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +32,26 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(@RequestParam Map<String,Object> request){
+    public void responsePost(@RequestParam Map<String,String> request){
         System.out.println("payload >>> " );
         System.out.println("payload >> " + request.get("payload"));
+        ObjectMapper mapper = new ObjectMapper();
 
-        Map<String,Object> payload = (Map<String, Object>) request.get("payload");
-        List<Map<String,Object>> actions = (List<Map<String, Object>>) payload.get("actions");
-        System.out.println("style == " + actions.get(0).get("style"));
+        String str = request.get("payload");
+        System.out.println("str >> " + str);
+
+        try {
+            Map<String,Object> result = mapper.readValue(str,Map.class);
+            List<Map<String,Object>> actions = (List<Map<String, Object>>) result.get("actions");
+            System.out.println("actions >>> " + actions.size());
+
+            System.out.println("actions.get(0) >>> " + actions.get(0));
+
+            System.out.println("actions.get(0).style >>> " + actions.get(0).get("style"));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @PostMapping("/response2")
