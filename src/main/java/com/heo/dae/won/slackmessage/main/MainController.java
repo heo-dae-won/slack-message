@@ -37,8 +37,9 @@ public class MainController {
         System.out.println("payload >>> " );
         payload.entrySet().forEach(System.out::println);
 
-        List<Map<String,Object>> actions = (List<Map<String, Object>>) payload.get("actions");
-        System.out.println("style ==> " + actions.get(0).get("style"));
+        System.out.println("type >> " + payload.get("type"));
+        System.out.println("actions >> " + payload.get("actions"));
+        System.out.println("payload >> " + payload.get("payload"));
     }
 
     @PostMapping("/response2")
