@@ -33,8 +33,9 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(String user){
-        System.out.println("block_actions >>> " + user);
+    public void responsePost(HttpServletRequest request){
+        System.out.println("block_actions >>> " );
+        request.getParameterMap().entrySet().forEach(System.out::println);
     }
 
     @PostMapping("/response2")
