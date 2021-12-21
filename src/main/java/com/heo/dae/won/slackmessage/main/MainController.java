@@ -32,11 +32,9 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(String type, String actions, Map<String,Object> user){
-        System.out.println("blocks >>> " + type);
-        System.out.println("actions >> " + actions);
-        user.entrySet().forEach(System.out::println);
-        System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
+    public void responsePost(HttpRequest request){
+        System.out.println("methodValue >>> " + request.getMethodValue());
+        System.out.println("headers >> " + request.getHeaders().toString());
     }
 
     @PostMapping("/response2")
