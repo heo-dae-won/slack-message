@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +33,8 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(HttpRequest request){
-        System.out.println("methodValue >>> " + request.getMethodValue());
-        System.out.println("headers >> " + request.getHeaders().toString());
+    public void responsePost(String block_actions){
+        System.out.println("block_actions >>> " + block_actions);
     }
 
     @PostMapping("/response2")
