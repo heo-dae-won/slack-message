@@ -33,13 +33,12 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(HttpServletRequest request, Map<String,Object> payload){
-        System.out.println("request >>> " );
-        request.getParameterMap().entrySet().forEach(System.out::println);
+    public void responsePost(@RequestParam Map<String,Object> payload){
         System.out.println("payload >>> " );
         payload.entrySet().forEach(System.out::println);
-        System.out.println("=========");
-        System.out.println(request.getParameter("payload"));
+
+        List<Map<String,Object>> actions = (List<Map<String, Object>>) payload.get("actions");
+        System.out.println("style ==> " + actions.get(0).get("style"));
     }
 
     @PostMapping("/response2")
