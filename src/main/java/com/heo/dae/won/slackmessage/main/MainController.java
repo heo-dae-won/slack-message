@@ -1,6 +1,8 @@
 package com.heo.dae.won.slackmessage.main;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
@@ -30,11 +32,10 @@ public class MainController {
     }
 
     @PostMapping("/response")
-    public void responsePost(@RequestBody Map<String, Object> data, Map<String, Object> data2){
+    public void responsePost(Map<String, Object> data, String value){
         System.out.println("callback id >>> ");
         data.entrySet().forEach(System.out::println);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> ");
-        data2.entrySet().forEach(System.out::println);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> value == " + value);
         System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
     }
 
@@ -43,6 +44,48 @@ public class MainController {
         System.out.println("response2222 >>> ");
         data.entrySet().forEach(System.out::println);
         System.out.println("post resposne >>>>>>>>>>>>>>>>>>>");
+    }
+
+    @GetMapping("/block")
+    public void block() throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+
+        Map<String,Object> requestBody = new HashMap<>();
+
+        List<Map<String,Object>> blocks = new ArrayList<>();
+
+        Map<String,Object> block = new HashMap<>();
+        block.put("type", "actions");
+        List<Map<String,Object>> elements = new ArrayList<>();
+
+        Map<String,Object> element = new HashMap<>();
+
+
+        Map<String, Object> text = new HashMap<>();
+        text.put("type", "plain_text");
+        text.put("emoji", true);
+        text.put("text", "Approve");
+
+        element.put("type", "button");
+        element.put("text", text);
+        element.put("style", "primary");
+        element.put("value", "click_me_123");
+
+
+        elements.add(element);
+        block.put("elements", elements);
+        blocks.add(block);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jStr = mapper.writeValueAsString(blocks);
+
+        System.out.println("json ++>>> " + jStr);
+
+        requestBody.put("blocks", mapper.writeValueAsString(blocks));
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<Map<String, Object>>(requestBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(SLACK_WEBHOOK, HttpMethod.POST, entity, String.class);
     }
 
     @GetMapping("/send")
